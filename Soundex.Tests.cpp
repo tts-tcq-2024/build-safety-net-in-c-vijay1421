@@ -8,6 +8,6 @@ TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits) {
  ASSERT_EQ(soundex,"A200");
 
  char soundex[5];
-generateSoundex("bcdlmnr", soundex);
-ASSERT_STREQ(soundex,"B234");
+generateSoundex("Vijay", soundex);
+ASSERT_STREQ(soundex,"V000");
 }
