@@ -6,34 +6,35 @@
 #include <string.h>
 
 char getSoundexCode(char c) {
-    c = toupper(c);
-    switch (c) {
-        case 'B': case 'F': case 'P': case 'V': return '1';
-        case 'C': case 'G': case 'J': case 'K': case 'Q': case 'S': case 'X': case 'Z': return '2';
-        case 'D': case 'T': return '3';
-        case 'L': return '4';
-        case 'M': case 'N': return '5';
-        case 'R': return '6'; 
-        default: return '0'; // For A, E, I, O, U, H, W, Y
+    static const char codeTable[26] = {
+        '0', '1', '2', '3', '0', '1', '2', '0', '0', '2', '2', '4', '5', '5', '0', '1', '2', '6', '2', '3', '0', '1', '0', '2', '0', '2'
+    };
+    if (isalpha(c)) {
+        return codeTable[toupper(c) - 'A'];
     }
+    return '0';
 }
 
+// Function to update the Soundex code array
+int updateSoundex(char code, int sIndex, char *soundex) {
+    if (code != '0') {
+        soundex[sIndex] = code;
+        return sIndex + 1;
+    }
+    return sIndex;
+}
+
+// Function to generate the Soundex code from a name
 void generateSoundex(const char *name, char *soundex) {
-    int len = strlen(name);
-    soundex[0] = toupper(name[0]);
+    if (name[0] != '\0') {
+        soundex[0] = toupper(name[0]);
+    }
     int sIndex = 1;
 
-    for (int i = 1; i < len && sIndex < 4; i++) {
-        char code = getSoundexCode(name[i]);
-        if (code != '0' && code != soundex[sIndex - 1]) {
-            soundex[sIndex++] = code;
-        }
+    for (int i = 1; name[i] != '\0' && sIndex <= 3; ++i) {
+        sIndex = updateSoundex(getSoundexCode(name[i]), sIndex, soundex);
     }
-
-    while (sIndex < 4) {
-        soundex[sIndex++] = '0';
-    }
-
+    memset(soundex + sIndex, '0', 4 - sIndex);
     soundex[4] = '\0';
 }
 
