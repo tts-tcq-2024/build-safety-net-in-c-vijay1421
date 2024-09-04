@@ -8,21 +8,21 @@
 void testGenerateSoundex() {
     char soundex[5];
 
-    // Test case 1: Basic name
-    generateSoundex("Smith", soundex);
-    assert(strcmp(soundex, "S530") == 0);
+    // Test case 1: name
+    generateSoundex("Vijay", soundex);
+    assert(strcmp(soundex, "V200") == 0);
 
-    // Test case 2: Name with repeated codes
-    generateSoundex("Johnson", soundex);
-    assert(strcmp(soundex, "J525") == 0);
+    // Test case 2: Name with repeated leyters
+    generateSoundex("Banana", soundex);
+    assert(strcmp(soundex, "B555") == 0);
 
     // Test case 3: Name with mixed vowels and consonants
-    generateSoundex("Euler", soundex);
-    assert(strcmp(soundex, "E460") == 0);
+    generateSoundex("Rules", soundex);
+    assert(strcmp(soundex, "R420") == 0);
 
     // Test case 4: Short name
-    generateSoundex("Lee", soundex);
-    assert(strcmp(soundex, "L000") == 0);
+    generateSoundex("Bee", soundex);
+    assert(strcmp(soundex, "B000") == 0);
 
     printf("All test cases passed successfully!\n");
 
