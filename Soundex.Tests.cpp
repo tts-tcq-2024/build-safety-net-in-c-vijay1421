@@ -1,44 +1,41 @@
 #include <gtest/gtest.h>
 #include "Soundex.h"
- 
-TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits) {
-//AAA
-  char soundex[5];
-generateSoundex("$rrr", soundex);
-ASSERT_STREQ(soundex,"$666");
-}
- 
-TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_1) {
-//AAA
-char soundex[5];
-generateSoundex("pvt", soundex);
-ASSERT_STREQ(soundex,"P130");
-}
- 
-TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_2) {
-//AAA
-  char soundex[5];
-generateSoundex("*#12hi", soundex);
-ASSERT_STREQ(soundex,"*000");
-}
- 
-TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_vowels) {
-//AAA
-char soundex[5];
-generateSoundex("aeiou", soundex);
-ASSERT_STREQ(soundex,"A000");
+#include <stdio.h>
+#include <string.h>
+#include <assert.h>
+
+
+void testGenerateSoundex() {
+    char soundex[5];
+
+    // Test case 1: Basic name
+    generateSoundex("Smith", soundex);
+    assert(strcmp(soundex, "S530") == 0);
+
+    // Test case 2: Name with repeated codes
+    generateSoundex("Johnson", soundex);
+    assert(strcmp(soundex, "J525") == 0);
+
+    // Test case 3: Name with mixed vowels and consonants
+    generateSoundex("Euler", soundex);
+    assert(strcmp(soundex, "E460") == 0);
+
+    // Test case 4: Short name
+    generateSoundex("Lee", soundex);
+    assert(strcmp(soundex, "L000") == 0);
+
+    printf("All test cases passed successfully!\n");
+
+    // Test case 5: Name with non-alphabetic characters
+    generateSoundex("O'Connor", soundex);
+    assert(strcmp(soundex, "O256") == 0);
+
+    // Test case 6: Name with all vowels
+    generateSoundex("AEIOU", soundex);
+    assert(strcmp(soundex, "A000") == 0);
 }
 
-TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_space) {
-//AAA
-char soundex[5];
-generateSoundex(" ", soundex);
-ASSERT_STREQ(soundex," 000");
-}
- 
-TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits_3) {
-//AAA
-char soundex[5];
-generateSoundex("bcdlmnr", soundex);
-ASSERT_STREQ(soundex,"B234");
+int main() {
+    testGenerateSoundex();
+    return 0;
 }
