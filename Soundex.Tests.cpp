@@ -14,7 +14,7 @@ void testGenerateSoundex() {
 
     // Test case 2: Name with repeated leyters
     generateSoundex("Banana", soundex);
-    assert(strcmp(soundex, "B555") == 0);
+    assert(strcmp(soundex, "B500") == 0);
 
     // Test case 3: Name with mixed vowels and consonants
     generateSoundex("Rules", soundex);
