@@ -13,7 +13,7 @@ char getSoundexCode(char c) {
         case 'D': case 'T': return '3';
         case 'L': return '4';
         case 'M': case 'N': return '5';
-        case 'R': return '6';
+        case 'R': return '6'; 
         default: return '0'; // For A, E, I, O, U, H, W, Y
     }
 }
