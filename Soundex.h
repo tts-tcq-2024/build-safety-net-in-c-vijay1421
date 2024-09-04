@@ -1,17 +1,17 @@
 #ifndef SOUNDEX_H
 #define SOUNDEX_H
-
-#include "Soundex.h"
+ 
 #include <ctype.h>
 #include <string.h>
-
+#include <stdio.h>
+ 
 char getSoundexCode(char c) {
-    static const char alphabetToNumberTable[26] = {
+    static const char codeTable[26] = {
         '0', '1', '2', '3', '0', '1', '2', '0', '0','2', '2', '4', '5', '5', '0', '1', '2', '6',  '2', '3', '0', '1', '0', '2', '0', '2'     
     };
      c = toupper(c);
     if (isalpha(c)) {
-        return alphabetToNumberTable[c - 'A'];
+        return codeTable[c - 'A'];
     }
     return '0';
 }  
@@ -36,5 +36,5 @@ void generateSoundex(const char *name, char *soundex) {
     memset(soundex + sIndex, '0', 4 - sIndex);
     soundex[4] = '\0';
 }
-
+ 
 #endif // SOUNDEX_H
